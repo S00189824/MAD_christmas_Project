@@ -11,25 +11,28 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+import android.content.Intent;
 
 public class MainActivity extends AppCompatActivity {
     private final int BLUE = 1;
     private final int RED = 2;
     private final int YELLOW = 3;
     private final int GREEN = 4;
+    View view1;
 
+    public static int sequenceCount = 4, scoreValue = 0, roundValue = 1;
     Button bRed, bBlue, bYellow, bGreen, fb;
-    int sequenceCount = 4, n = 0;
+    int n = 0;
     private Object mutex = new Object();
     int[] gameSequence = new int[120];
     int arrayIndex = 0;
 
-    CountDownTimer ct = new CountDownTimer(6000,  1500) {
+    CountDownTimer ct = new CountDownTimer((800 * sequenceCount) + 3000,  1500) {
 
         public void onTick(long millisUntilFinished) {
-            //mTextField.setText("seconds remaining: " + millisUntilFinished / 1500);
-            oneButton();
-            //here you can have your logic to set text to edittext
+
+            FlashButton();
+
         }
 
         public void onFinish() {
@@ -40,14 +43,17 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("game sequence", String.valueOf(gameSequence[i]));
             // start next activity
 
-            // put the sequence into the next activity
-            // stack overglow https://stackoverflow.com/questions/3848148/sending-arrays-with-intent-putextra
-            //Intent i = new Intent(A.this, B.class);
-            //i.putExtra("numbers", array);
-            //startActivity(i);
 
-            // start the next activity
-            // int[] arrayB = extras.getIntArray("numbers");
+
+
+            Intent intent = new Intent(view1.getContext(),PlayScreen_Accelerometer.class);
+
+            intent.putExtra("sequenceArray", gameSequence);
+            intent.putExtra("sequenceCount", sequenceCount);
+            intent.putExtra("round", roundValue);
+            intent.putExtra("score", scoreValue);
+
+            startActivity(intent);
         }
     };
 
@@ -60,14 +66,16 @@ public class MainActivity extends AppCompatActivity {
         bBlue = findViewById(R.id.btnBlue);
         bYellow = findViewById(R.id.btnYellow);
         bGreen = findViewById(R.id.btnGreen);
+
+        view1 = new View(this);
     }
 
     public void doPlay(View view) {
         ct.start();
     }
 
-    private void oneButton() {
-        n = getRandom(sequenceCount);
+    private void FlashButton() {
+        n = getRandom(4);
 
         Toast.makeText(this, "Number = " + n, Toast.LENGTH_SHORT).show();
 
@@ -91,6 +99,8 @@ public class MainActivity extends AppCompatActivity {
             default:
                 break;
         }   // end switch
+
+
     }
 
     //
@@ -122,21 +132,5 @@ public class MainActivity extends AppCompatActivity {
         handler.postDelayed(r, 600);
     }
 
-    public void doTest(View view) {
-        for (int i = 0; i < sequenceCount; i++) {
-            int x = getRandom(sequenceCount);
 
-            Toast.makeText(this, "Number = " + x, Toast.LENGTH_SHORT).show();
-
-            if (x == 1)
-                flashButton(bBlue);
-            else if (x == 2)
-                flashButton(bRed);
-            else if (x == 3)
-                flashButton(bYellow);
-            else if (x == 4)
-                flashButton(bGreen);
-        }
-
-    }
 }
