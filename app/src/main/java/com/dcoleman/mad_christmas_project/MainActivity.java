@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     int[] gameSequence = new int[120];
     int arrayIndex = 0;
 
-    CountDownTimer ct = new CountDownTimer((800 * sequenceCount) + 3000,  1500) {
+    CountDownTimer ct = new CountDownTimer((1000 * sequenceCount) + 2000,  1500) {
 
         public void onTick(long millisUntilFinished) {
 

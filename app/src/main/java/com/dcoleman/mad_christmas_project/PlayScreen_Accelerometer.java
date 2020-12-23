@@ -30,7 +30,7 @@ public class PlayScreen_Accelerometer extends AppCompatActivity implements Senso
     private Sensor mSensor;
 
     TextView score ,round;
-    int scoreValue = 500, roundValue;
+    int scoreValue, roundValue ;
 
     Button btnNorth, btnSouth, btnEast, btnWest;
     View view;
@@ -60,6 +60,8 @@ public class PlayScreen_Accelerometer extends AppCompatActivity implements Senso
         gameSequence = getIntent().getIntArrayExtra("sequenceArray");
 
         view = new View(this);
+        //round.setText(String.valueOf(roundValue));
+        round.setText(String.valueOf(MainActivity.roundValue));
     }
 
     /*

@@ -26,6 +26,11 @@ public class GameOver extends AppCompatActivity {
     }
 
     public void doScore(View view) {
+        Intent highScoreActivity = new Intent(view.getContext(), HighScore.class);
 
+        highScoreActivity.putExtra("score", MainActivity.scoreValue);
+
+        startActivity(highScoreActivity);
+        finish();
     }
 }

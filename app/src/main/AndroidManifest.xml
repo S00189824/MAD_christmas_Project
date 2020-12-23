@@ -9,10 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MAD_christmas_Project">
-        <activity android:name=".GameOver"
-            android:screenOrientation="landscape">
+        <activity android:name=".HighScore" android:screenOrientation="landscape"></activity>
+        <activity
+            android:name=".GameOver"
+            android:screenOrientation="landscape"></activity>
 
-        </activity>
+
         <activity
             android:name=".PlayScreen_Accelerometer"
             android:screenOrientation="landscape" />
